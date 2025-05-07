@@ -30,7 +30,10 @@ export function IconBox({
   }
 
   return (
-    <Link className={linkClassName} href={link ?? "#"}>
+    <Link
+      className={` flex items-center cursor-pointer ml-1 ${linkClassName} `}
+      href={link ?? "#"}
+    >
       {badge ? (
         <div className="relative">
           <span className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">
@@ -45,7 +48,7 @@ export function IconBox({
 
       {title && (
         <div
-          className={` ${
+          className={` ml-1 ${
             hideTitleOnMobile ? "hidden xl:inline-block" : "inline-block"
           } ${titleClassName}  `}
         >
@@ -55,7 +58,3 @@ export function IconBox({
     </Link>
   );
 }
-
-// {
-// text-medium text-gray-500 font-lato
-// }

@@ -6,8 +6,11 @@ import { browserCategoryMock } from "@/mock/BrowserCategory";
 
 // components
 import { IconBox } from "@/components/common";
+import { menuMock } from "@/mock/menu";
 
 export function Menu() {
+  // TODO load menu data from api
+
   return (
     <>
       <div
@@ -20,14 +23,13 @@ export function Menu() {
           title={"Browse All Categories"}
           link={"#"}
           titleClassName={"text-medium ml-1"}
-          linkClassName={"flex item-center "}
         />
 
         <IconBox icon={"icon-angle-small-down"} size={24} />
 
         <div
           id="all_categories_box"
-          className=" absolute z-20 bg-white left-0 top-16 w-[500px] rounded-[5px] border-[1px] border-green-300 p-[30px] hover:cursor-default"
+          className=" hidden absolute z-20 bg-white left-0 top-16 w-[500px] rounded-[5px] border-[1px] border-green-300 p-[30px] hover:cursor-default"
         >
           <div
             id="all_cat_inner_box"
@@ -38,7 +40,7 @@ export function Menu() {
                 <IconBox
                   key={index}
                   linkClassName={
-                    "flex items-center gap-3.5 rounded-[5px] lg:border-[1px] lg:border-gray-300 py-2.5 basis-[calc(50%-8px)] justify-start pl-4 lg:hover:border-green-300 cursor-pointer"
+                    "flex items-center gap-3.5 rounded-[5px] lg:border-[1px] lg:border-gray-300 py-2.5 basis-[calc(50%-8px)] justify-start pl-4 lg:hover:border-green-300 "
                   }
                   link={item.link}
                   icon={item.icon}
@@ -65,29 +67,19 @@ export function Menu() {
 
       <nav id="main_menu">
         <ul className="flex flex-col lg:flex-row items-start lg:items-center text-heading6 lg:text-heading-sm 2xl:text-heading6 gap-[32px] mt-[32px] lg:mt-0 lg:gap-3 xl:gap-5 2xl:gap-10">
-          <li>
-            <Link href="#" className="flex flex-row gap-2 items-center">
-              <i className="icon-flame text-[24px]" />
-              <div className="text-heading6 lg:text-heading-sm xl:text-heading6">
-                Hot Deals
-              </div>
-            </Link>
-          </li>
-          <li>
-            <Link href="#" className="flex items-center gap-1">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="#" className="flex flex-row">
-              Food
-            </Link>
-          </li>
-          <li>
-            <Link href="#" className="flex flex-row">
-              Vegetables
-            </Link>
-          </li>
+          {menuMock.map((item, index) => {
+            return (
+              <li key={index}>
+                {item.icon ? (
+                  <IconBox {...item} size={24} />
+                ) : (
+                  <Link href={item.link} className="flex items-center gap-1">
+                    {item.title}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </>

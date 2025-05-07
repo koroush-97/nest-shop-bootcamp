@@ -14,7 +14,9 @@ export function Header() {
       <div>
         <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
           <Logo />
-          <SearchForm />
+          <div className="border-2 border-green-150 rounded-[5px] max-w-[700px] w-full mx-[15px] px-[15px] hidden lg:inline-block">
+            <SearchForm inputClassName={"py-[15px]"} />
+          </div>
           <ul className="hidden lg:flex gap-5">
             <li className="flex gap-2 cursor-pointer">
               <IconBox
@@ -55,9 +57,14 @@ export function Header() {
             <Menu />
 
             <div className="hidden lg:flex items-center shrink-0 gap-3">
-              <Link href="#">
-                <i className="icon-headset text-[30px] xl:text-[32px] 2xl:text-[36px] aspect-square" />
-              </Link>
+              <IconBox
+                icon={
+                  "icon-headset xl:text-[32px] 2xl:text-[36px] aspect-square"
+                }
+                size={30}
+                link={"#"}
+              />
+
               <div>
                 <Link
                   href="tel:19008888"
@@ -72,46 +79,33 @@ export function Header() {
               </div>
             </div>
           </div>
-          <div className="container flex justify-between lg:hidden pt-[20px] pb-[16px] items-end">
+          <div className="container flex justify-between lg:hidden pt-[20px] pb-[16px] items-center">
             <div className="border-[1px] border-green-150 rounded-[5px] w-full max-w-[220px] p-[6px]">
-              <form
-                name="search-form"
-                action="#"
-                method="post"
-                className="flex items-center"
-              >
-                <input
-                  type="text"
-                  name="search_text"
-                  placeholder="Search for items"
-                  className="text-xsmall text-gray-400 border-gray-300 w-full focus:outline-none"
-                />
-                <button type="submit">
-                  <i className="icon-search text-[16px]" />
-                </button>
-              </form>
+              <SearchForm />
             </div>
             <ul className="flex gap-5">
               <li className="flex gap-2 cursor-pointer">
-                <Link href="#">
-                  <i className="icon-user text-[24px]" />
-                </Link>
-                <div className="hidden xl:inline-block text-medium text-gray-500 font-lato">
-                  Account
-                </div>
+                <IconBox
+                  linkClassName={"flex item-center"}
+                  icon={"icon-user"}
+                  size={24}
+                  title={"Account"}
+                  link={"#"}
+                  hideTitleOnMobile={true}
+                  titleClassName={"text-medium text-gray-500 font-lato  ml-2"}
+                />
               </li>
               <li className="flex gap-2 cursor-pointer">
-                <div className="relative">
-                  <span className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">
-                    4
-                  </span>
-                  <Link href="#">
-                    <i className="icon-shopping-cart text-[24px]" />
-                  </Link>
-                </div>
-                <div className="hidden xl:inline-block text-medium text-gray-500 font-lato">
-                  Card
-                </div>
+                <IconBox
+                  linkClassName={"flex item-center"}
+                  icon={"icon-shopping-cart"}
+                  size={24}
+                  title={"Card"}
+                  link={"#"}
+                  hideTitleOnMobile={true}
+                  badge={2}
+                  titleClassName={"text-medium text-gray-500 font-lato  ml-2"}
+                />
               </li>
             </ul>
           </div>
