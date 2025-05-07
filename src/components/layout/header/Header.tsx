@@ -1,5 +1,11 @@
-import { Logo } from "@/components";
+// react elements
+
 import Link from "next/link";
+
+// components
+
+import { Logo } from "@/components";
+import { SearchForm } from "@/components";
 
 export function Header() {
   return (
@@ -7,24 +13,7 @@ export function Header() {
       <div>
         <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
           <Logo />
-          <div className="border-2 border-green-150 rounded-[5px] max-w-[700px] w-full mx-[15px] px-[15px] hidden lg:inline-block">
-            <form
-              name="search-form"
-              action="#"
-              method="post"
-              className="flex items-center"
-            >
-              <input
-                type="text"
-                name="search_text"
-                placeholder="Search for items"
-                className="text-xsmall text-gray-400 border-gray-300 w-full py-[15px] focus:outline-none"
-              />
-              <button type="submit">
-                <i className="icon-search text-[22px]" />
-              </button>
-            </form>
-          </div>
+          <SearchForm />
           <ul className="hidden lg:flex gap-5">
             <li className="flex gap-2 cursor-pointer">
               <Link href="#">
