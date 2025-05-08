@@ -16,8 +16,7 @@ module.exports = {
       //   "hero-img": "url('../../images/hero-img.png')",
       // },
       fontFamily: {
-        quickSand: ["Quicksand", "sans-serif"],
-        lato: ["Lato", "sans-serif"],
+        lato: ["var( --font-lato)"],
       },
       fontSize: {
         display1: [
