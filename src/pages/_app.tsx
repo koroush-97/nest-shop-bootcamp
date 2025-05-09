@@ -1,6 +1,9 @@
 import Layout from "@/components/layout/Layout";
 import "@/styles/globals.css";
 import "@/styles/icons.css";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/autoplay";
 import type { AppProps } from "next/app";
 
 import { Lato, Quicksand } from "next/font/google";
