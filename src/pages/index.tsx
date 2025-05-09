@@ -1,5 +1,6 @@
 // components
 import { Section, Banner } from "@/components";
+import { FeaturedCategories } from "@/components";
 
 export default function Home() {
   return (
@@ -12,6 +13,13 @@ export default function Home() {
           image={"/assets/images/banner_bg.png"}
         />
       </Section>
+
+      <section className="container">
+        <div className="hidden sm:flex mb-[50px]">
+          <h2 className="text-heading3 text-blue-300">Featured Categories</h2>
+        </div>
+        <FeaturedCategories />
+      </section>
     </>
   );
 }
