@@ -30,7 +30,9 @@ export function Rating({ rate }: Props) {
         {star}
         {notstar}
       </ul>
-      <div className="text-xsmall text-gray-500 font-lato">( {rate} )</div>
+      <div className="text-xsmall text-gray-500 font-lato text-nowrap">
+        ( {rate} )
+      </div>
     </>
   );
 }

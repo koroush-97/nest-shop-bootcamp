@@ -14,15 +14,14 @@ interface Props {
     sale_price: number;
     price: number;
     label: string;
+    total?: number;
+    sold?: number;
   };
 }
 
 export function SimpleProductCard({ data }: Props) {
   return (
     <div className="group border-[1px] border-gray-200 hover:border-green-150 rounded-[10px] hover:shadow-[20px_20px_40px_0_rgba(24,24,24,0.07)] relative p-3 md:p-4 xl:px-5 xl:pb-5 lg:pt-[65px] h-full">
-      {/* <div className="badge badge--off absolute left-0 top-0 lg:top-5 rounded-tl-[10px] lg:rounded-tl-none">
-        -17%
-      </div> */}
       <Badge
         badge={data.label}
         price={data.price}
@@ -61,33 +60,86 @@ export function SimpleProductCard({ data }: Props) {
           {data.weight} {data.unit}
         </div>
       </div>
-      <div className="flex items-center justify-between mt-3">
-        <div>
-          <span className="text-heading5 text-green-200">
-            $ ${data.sale_price}
-          </span>
-          <span className="text-heading-sm line-through text-gray-500">
-            ${data.price}
-          </span>
-        </div>
-        <div className="add-product">
-          <button className="flex items-center justify-center text-heading-sm text-green-200 border-[1px] rounded-[4px] bg-green-150 px-[10px] py-[5px]">
-            Adds +
-          </button>
-          <div className="input-product__container hidden border-[1px] rounded-[4px] border-green-300 text-green-300 h-[30px] p-[3px]">
-            <input
-              type="number"
-              defaultValue={1}
-              className="input-product h-[24px] w-[50px] border-0 focus:outline-none text-center"
-            />
-            <div className="flex flex-col justify-between">
-              <IconBox icon="up icon-angle-small-up" size={10} />
-
-              <IconBox icon="down icon-angle-small-down" size={10} />
+      {data.total && data.sold ? (
+        <>
+          <div>
+            <div className="flex items-center justify-between mt-3">
+              {data.sale_price ? (
+                <div>
+                  <span className="text-heading5 text-green-200">
+                    ${data.sale_price}{" "}
+                  </span>
+                  <span className="text-heading-sm line-through text-gray-500">
+                    ${data.price}
+                  </span>
+                </div>
+              ) : (
+                <span className="text-heading-sm line-through text-gray-500">
+                  ${data.price}
+                </span>
+              )}
+              <div>
+                <span className="text-heading5 text-green-200">
+                  ${data.sale_price}{" "}
+                </span>
+                <span className="text-heading-sm line-through text-gray-500">
+                  ${data.price}
+                </span>
+              </div>
+            </div>
+            <div className="mt-[15px] bg-gray-200 h-[4px] w-full rounded-[2px]">
+              <div
+                style={{ width: `${(data.sold / data.total) * 100}%` }}
+                className={`bg-green-200 h-[4px] rounded-[2px]`}
+              />
+            </div>
+            <div className="mt-2.5 font-lato text-blue-300 text-xsmall">
+              Sold: {data.sold}/{data.total}
+            </div>
+            <div className="mt-[23px]">
+              <button className="flex justify-center items-center gap-2 xl:text-heading-sm text-white border-[1px] w-full rounded-[4px] bg-green-200 hover:bg-yellow-100 px-2 py-2 lg:py-[14px]">
+                <i className="icon-shopping-cart text-[22px]" />
+                <span className="text-heading-sm">Add To Card</span>
+              </button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="flex items-center justify-between mt-3">
+          <div>
+            data.sale_price ? (
+            <div>
+              <span className="text-heading5 text-green-200">
+                ${data.sale_price}{" "}
+              </span>
+              <span className="text-heading-sm line-through text-gray-500">
+                ${data.price}
+              </span>
+            </div>
+            ) : (
+            <span className="text-heading-sm line-through text-gray-500">
+              ${data.price}
+            </span>
+            )
+          </div>
+          <div className="add-product">
+            <button className="flex items-center justify-center text-heading-sm text-green-200 border-[1px] rounded-[4px] bg-green-150 px-[10px] py-[5px]">
+              Adds +
+            </button>
+            <div className="input-product__container hidden border-[1px] rounded-[4px] border-green-300 text-green-300 h-[30px] p-[3px]">
+              <input
+                type="number"
+                defaultValue={1}
+                className="input-product h-[24px] w-[50px] border-0 focus:outline-none text-center"
+              />
+              <div className="flex flex-col justify-between">
+                <IconBox icon="up icon-angle-small-up" size={10} />
+                <IconBox icon="down icon-angle-small-down" size={10} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
