@@ -107,20 +107,20 @@ export function SimpleProductCard({ data }: Props) {
       ) : (
         <div className="flex items-center justify-between mt-3">
           <div>
-            data.sale_price ? (
-            <div>
-              <span className="text-heading5 text-green-200">
-                ${data.sale_price}{" "}
-              </span>
+            {data.sale_price ? (
+              <div>
+                <span className="text-heading5 text-green-200">
+                  ${data.sale_price}{" "}
+                </span>
+                <span className="text-heading-sm line-through text-gray-500">
+                  ${data.price}
+                </span>
+              </div>
+            ) : (
               <span className="text-heading-sm line-through text-gray-500">
                 ${data.price}
               </span>
-            </div>
-            ) : (
-            <span className="text-heading-sm line-through text-gray-500">
-              ${data.price}
-            </span>
-            )
+            )}
           </div>
           <div className="add-product">
             <button className="flex items-center justify-center text-heading-sm text-green-200 border-[1px] rounded-[4px] bg-green-150 px-[10px] py-[5px]">

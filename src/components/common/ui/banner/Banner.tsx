@@ -12,14 +12,12 @@ export function Banner({ title, subtitle, bgImage, image }: Props) {
   return (
     <>
       <div
+        className="grid grid-cols-2 items-center rounded-lg bg-[#FDC040] bg-opacity-20 bg-no-repeat bg-[position:calc(100%)_center] md:bg-[position:calc(100%-60px)_center] md:p-[60px] aspect-square  w-full  max-h-[100px] sm:max-h-[200px] md:max-h-[200px] lg:max-h-[600px]  bg-[size:180px_100px] md:bg-[size:400px_200px] lg:bg-[size:700px_600px]"
         style={{
-          backgroundImage: `url('${bgImage}')`,
+          backgroundImage: `url(${bgImage})`,
         }}
-        className={`grid grid-cols-2 items-center rounded-lg p-[60px] bg-[#FDC040] bg-opacity-20 
-          bg-no-repeat bg-[position:calc(100%-60px)_center] bg-contain 
-          md:bg-[position:calc(100%-10px)_up] md:bg-[length:417px_238px] lg:bg-[length:517px_338px]`}
       >
-        <div className="pl-[20px] md:pl-[60px]">
+        <div className="pl-[20px] md:pl-[60px] ">
           <h2 className="text-heading5 sm:text-heading4 lg:text-heading2 xl:text-heading1 2xl:text-display2 text-blue-300 mb-[33px]">
             {title}
           </h2>
@@ -53,11 +51,12 @@ export function Banner({ title, subtitle, bgImage, image }: Props) {
           height={538}
         />
       </div>
+
       <form
         name="subscription"
         method="post"
         action="#"
-        className="flex lg:hidden gap-2.5 items-center justify-between rounded-[30px] mx-auto max-w-[550px] bg-[#F5F5F5] pl-4 sm:pl-5 md:pl-6 mt-4 sm:mt-5 md:mt-6"
+        className="flex  lg:hidden gap-2.5 items-center justify-between rounded-[30px] mx-auto max-w-[550px] bg-[#F5F5F5] pl-4 sm:pl-5 md:pl-6 mt-4 sm:mt-5 md:mt-6"
       >
         <IconBox icon="icon-paper-plane" size={24} link="#" />
 
