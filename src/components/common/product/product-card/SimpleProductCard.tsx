@@ -49,9 +49,11 @@ export function SimpleProductCard({ data }: Props) {
       <div className="flex flex-col gap-2">
         <div className="text-gray-500 text-xsmall">{data.category}</div>
         <Link href={"#"}>
-          <h3 className="text-heading-sm text-blue-300 max-h-[50px] overflow-hidden">
-            {data.title}
-          </h3>
+          <div className="   h-[60px]">
+            <h3 className="text-heading-sm text-blue-300 max-h-[50px]  overflow-hidden ">
+              {data.title}
+            </h3>
+          </div>
         </Link>
         <div className="flex gap-4">
           <Rating rate={data.rate} />

@@ -7,7 +7,7 @@
         unit: 'gram',
         price : 22222,
         sale_price: 111 ,
-        dead_line: '2024-02-20 12:10:02'
+        dead_line: '2025-08-12 00:00:00'
     },
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
@@ -17,7 +17,7 @@
         unit: 'gram',
         price : 22222,
         sale_price: 111 ,
-        dead_line: '2024-02-20 12:10:02'
+        dead_line: '2025-08-12 00:00:00'
     },
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
@@ -27,7 +27,7 @@
         unit: 'gram',
         price : 22222,
         sale_price: 111 ,
-        dead_line: '2024-02-20 12:10:02'
+        dead_line: '2025-08-12 00:00:00'
     },
     {
         title: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
@@ -37,6 +37,6 @@
         unit: 'gram',
         price : 22222,
         sale_price: 111 ,
-        dead_line: '2024-02-20 12:10:02'
+        dead_line: '2025-08-12 00:00:00'
     },
  ]
