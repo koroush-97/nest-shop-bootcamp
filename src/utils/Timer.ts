@@ -18,10 +18,7 @@ if (timeRemaining > 0) {
   timeobj.seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 }
 
-console.log(timeobj.days);
-console.log(timeobj.minutes);
-console.log(timeobj.hours);
-console.log(timeobj.seconds);
+;
 
 return timeobj;
 

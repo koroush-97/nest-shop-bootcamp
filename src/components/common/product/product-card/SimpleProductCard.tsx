@@ -46,14 +46,13 @@ export function SimpleProductCard({ data }: Props) {
         height={168}
         width={210}
       />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 ">
         <div className="text-gray-500 text-xsmall">{data.category}</div>
         <Link href={"#"}>
-          <div className="   h-[60px]">
-            <h3 className="text-heading-sm text-blue-300 max-h-[50px]  overflow-hidden ">
-              {data.title}
-            </h3>
-          </div>
+          // TODO chick this h3 for height
+          <h3 className="text-heading-sm text-blue-300 h-[70px]  overflow-hidden ">
+            {data.title}
+          </h3>
         </Link>
         <div className="flex gap-4">
           <Rating rate={data.rate} />

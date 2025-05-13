@@ -6,10 +6,21 @@ import { browserCategoryMock } from "@/mock/BrowserCategory";
 
 // components
 import { IconBox } from "@/components/common";
+
+// api and hooks
 import { menuMock } from "@/mock/menu";
+import { useQuery } from "@tanstack/react-query";
+import { getMenuApiCall } from "@/api/menu/Menu";
 
 export function Menu() {
   // TODO load menu data from api
+
+  const { data: menuData } = useQuery({
+    queryKey: [getMenuApiCall.name],
+    queryFn: () => getMenuApiCall(),
+  });
+
+  console.log("menuData :", menuData);
 
   return (
     <>
