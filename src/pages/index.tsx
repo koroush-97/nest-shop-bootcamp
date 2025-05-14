@@ -18,14 +18,27 @@ import Link from "next/link";
 import { DealsOfTheDaysMock } from "@/mock/DealsOfTheDayMock";
 import { getAllProductsApiCall } from "@/api/Product";
 import { useQuery } from "@tanstack/react-query";
+import { ApiResponseType } from "@/types";
+import { ProductType } from "@/types/api/Product";
 
 export default function Home() {
-  const { data: popularProduct } = useQuery({
-    queryKey: [getAllProductsApiCall.name],
+  const { data: popularProduct } = useQuery<ApiResponseType<ProductType>>({
+    queryKey: [getAllProductsApiCall.name, "popular_product"],
     queryFn: () =>
       getAllProductsApiCall({
         populate: ["categories", "thumbnail"],
         filters: { is_popular: true },
+      }),
+  });
+
+  const { data: PopularFruitProductsData } = useQuery<
+    ApiResponseType<ProductType>
+  >({
+    queryKey: [getAllProductsApiCall.name, "popular_Fruit"],
+    queryFn: () =>
+      getAllProductsApiCall({
+        populate: ["categories", "thumbnail"],
+        filters: { is_popular_fruit: true },
       }),
   });
 
@@ -65,12 +78,13 @@ export default function Home() {
             />
           </div>
         </div>
-
-        <SimpleProductSlider
-          nextEl={".swiper-nav-right"}
-          prevEl={".swiper-nav-left"}
-          sliderData={popularProducts}
-        />
+        {popularProduct && (
+          <SimpleProductSlider
+            nextEl={".swiper-nav-right"}
+            prevEl={".swiper-nav-left"}
+            sliderData={popularProduct.data}
+          />
+        )}
       </section>
 
       <section className="container mt-[50px]">
@@ -88,11 +102,13 @@ export default function Home() {
           </div>
         </div>
 
-        <SimpleProductSlider
-          nextEl={".swiper-nav-right2"}
-          prevEl={".swiper-nav-left2"}
-          sliderData={PopularFruit}
-        />
+        {PopularFruitProductsData && (
+          <SimpleProductSlider
+            nextEl={".swiper-nav-right2"}
+            prevEl={".swiper-nav-left2"}
+            sliderData={PopularFruitProductsData?.data}
+          />
+        )}
       </section>
 
       <section>

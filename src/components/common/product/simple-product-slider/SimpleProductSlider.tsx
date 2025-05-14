@@ -1,8 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { SimpleProductCard } from "../product-card";
+import { EntityType } from "@/types";
+import { ProductType } from "@/types/api/Product";
 interface Props {
-  sliderData: Array<any>;
+  sliderData: Array<EntityType<ProductType>>;
   nextEl?: string;
   prevEl?: string;
 }
