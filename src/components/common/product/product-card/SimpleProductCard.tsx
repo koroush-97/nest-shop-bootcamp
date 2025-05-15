@@ -9,6 +9,8 @@ interface Props {
   data: EntityType<ProductType>;
 }
 
+//TODO bepors dar bareh y shart ha braye ertefa
+
 export function SimpleProductCard({ data }: Props) {
   return (
     <div className="group border-[1px] border-gray-200 hover:border-green-150 rounded-[10px] hover:shadow-[20px_20px_40px_0_rgba(24,24,24,0.07)] relative p-3 md:p-4 xl:px-5 xl:pb-5 lg:pt-[65px] h-full">
@@ -46,7 +48,6 @@ export function SimpleProductCard({ data }: Props) {
           </div>
         )}
         <Link href={"#"}>
-          // TODO chick this h3 for height
           <h3 className="text-heading-sm text-blue-300 h-[70px]  overflow-hidden ">
             {data.attributes?.title}
           </h3>

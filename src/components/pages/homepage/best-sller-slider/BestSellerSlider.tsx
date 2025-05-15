@@ -1,9 +1,11 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { SimpleProductCard } from "@/components/common/product/product-card/SimpleProductCard";
+import { EntityType } from "@/types";
+import { ProductType } from "@/types/api/Product";
 
 interface Props {
-  sliderData: Array<any>;
+  sliderData: EntityType<ProductType>[];
 }
 
 export function BestSellerSlider({ sliderData }: Props) {
@@ -24,10 +26,10 @@ export function BestSellerSlider({ sliderData }: Props) {
         },
       }}
     >
-      {sliderData.map((slideData, index) => {
+      {sliderData.map((sliderData, index) => {
         return (
           <SwiperSlide key={index}>
-            <SimpleProductCard data={slideData} />
+            <SimpleProductCard data={sliderData} />
           </SwiperSlide>
         );
       })}

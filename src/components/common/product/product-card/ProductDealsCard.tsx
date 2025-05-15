@@ -2,20 +2,26 @@ import { useEffect, useState } from "react";
 import { ImagView } from "../../imag-view";
 import { Rating } from "../../rating";
 import { timerHelper } from "@/utils/Timer";
+import { EntityType } from "@/types";
+import { ProductType } from "@/types/api/Product";
+
+// interface Props {
+//   data: {
+//     title: string;
+//     image: string;
+//     category: string;
+//     rate: number;
+//     weight: number;
+//     unit: string;
+//     sale_price: number;
+//     price: number;
+//     label: string;
+//     dead_line: string;
+//   };
+// }
 
 interface Props {
-  data: {
-    title: string;
-    image: string;
-    category: string;
-    rate: number;
-    weight: number;
-    unit: string;
-    sale_price: number;
-    price: number;
-    label: string;
-    dead_line: string;
-  };
+  data: EntityType<ProductType>;
 }
 
 export function ProductDealsCard({ data }: Props) {
@@ -26,11 +32,34 @@ export function ProductDealsCard({ data }: Props) {
     seconds: 0,
   });
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const timeObj = timerHelper(data.attributes.discount_expire_date ?? "");
+  //     setRemainTime(timeObj);
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
+
+  // TODO تاریخ رو از استاد برای ایده کمک بگیر
+
   useEffect(() => {
     const interval = setInterval(() => {
-      const timeObj = timerHelper(data.dead_line);
-      setRemainTime(timeObj);
+      const expireDateStr = data?.attributes?.discount_expire_date;
+
+      if (expireDateStr) {
+        const expireDate = new Date(expireDateStr);
+
+        expireDate.setFullYear(expireDate.getFullYear() + 1);
+
+        const modifiedDateStr = expireDate.toISOString();
+
+        const timeObj = timerHelper(modifiedDateStr);
+        setRemainTime(timeObj);
+      }
     }, 1000);
+
     return () => {
       clearInterval(interval);
     };
@@ -41,7 +70,7 @@ export function ProductDealsCard({ data }: Props) {
       <div className="relative h-[438px]">
         <ImagView
           className="w-full"
-          src={data.image}
+          src={data.attributes.thumbnail?.data?.attributes.url}
           alt={"product"}
           width={378}
           height={335}
@@ -74,29 +103,31 @@ export function ProductDealsCard({ data }: Props) {
             </div>
           </div>
           <div className="bg-white mt-2.5 px-8 pt-6 pb-4 rounded-[10px] shadow-c-xs">
-            <div className="text-heading-sm text-blue-300">{data.title}</div>
+            <div className="text-heading-sm text-blue-300">
+              {data.attributes.title}
+            </div>
             <div className="flex w-[106px] justify-between h-4 items-center mt-1">
               <div className="flex gap-4 pt-5">
-                <Rating rate={data.rate} />
+                <Rating rate={data.attributes.rate} />
                 {/* <div className="text-xsmall text-gray-500 font-lato">(4.0)</div> */}
               </div>
             </div>
             <div className="font-lato text-xsmall text-gray-500 mt-1">
-              {data.weight} {data.unit}
+              {data.attributes.weight} {data.attributes.unit}
             </div>
             <div className="flex items-center justify-between mt-3">
-              {data.sale_price ? (
+              {data.attributes.sell_price ? (
                 <div>
                   <span className="text-heading5 text-green-200">
-                    ${data.sale_price}{" "}
+                    ${data.attributes.sell_price}{" "}
                   </span>
                   <span className="text-heading-sm line-through text-gray-500">
-                    ${data.price}
+                    ${data.attributes.price}
                   </span>
                 </div>
               ) : (
                 <span className="text-heading-sm line-through text-gray-500">
-                  ${data.price}
+                  ${data.attributes.price}
                 </span>
               )}
               <div className="add-product">

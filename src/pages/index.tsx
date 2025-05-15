@@ -27,7 +27,7 @@ export default function Home() {
     queryFn: () =>
       getAllProductsApiCall({
         populate: ["categories", "thumbnail"],
-        filters: { is_popular: true },
+        filters: { is_popular: { $eq: true } },
       }),
   });
 
@@ -38,7 +38,27 @@ export default function Home() {
     queryFn: () =>
       getAllProductsApiCall({
         populate: ["categories", "thumbnail"],
-        filters: { is_popular_fruit: true },
+        filters: { is_popular_fruit: { $eq: true } },
+      }),
+  });
+
+  const { data: BestSellerProductsData } = useQuery<
+    ApiResponseType<ProductType>
+  >({
+    queryKey: [getAllProductsApiCall.name, "Best_seller"],
+    queryFn: () =>
+      getAllProductsApiCall({
+        populate: ["categories", "thumbnail"],
+        filters: { is_best_seller: { $eq: true } },
+      }),
+  });
+
+  const { data: dealsOfDayData } = useQuery<ApiResponseType<ProductType>>({
+    queryKey: [getAllProductsApiCall.name, "deal_of_day"],
+    queryFn: () =>
+      getAllProductsApiCall({
+        populate: ["categories", "thumbnail"],
+        filters: { discount_expire_date: { $notNull: true } },
       }),
   });
 
@@ -131,7 +151,11 @@ export default function Home() {
                 <i className="icon-arrow-small-right text-[24px]" />
               </Link>
             </div>
-            <BestSellerSlider sliderData={BestSellers} />
+            {BestSellerProductsData && (
+              <div className="w-[100%] h-full">
+                <BestSellerSlider sliderData={BestSellerProductsData?.data} />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -146,7 +170,9 @@ export default function Home() {
             <IconBox icon="icon-angle-small-right text-[24px]" size={24} />
           </Link>
         </div>
-        <DealsOFTheDaySlider sliderData={DealsOfTheDaysMock} />
+        {dealsOfDayData && (
+          <DealsOFTheDaySlider sliderData={dealsOfDayData.data} />
+        )}
       </section>
 
       <section className="container mt-[50px]">
