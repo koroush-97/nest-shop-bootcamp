@@ -1,8 +1,10 @@
+import { EntityType } from "@/types";
 import { MinProductCard } from "../product-card";
+import { ProductType } from "@/types/api/Product";
 
 interface Props {
   title: string;
-  data: Array<any>;
+  data: Array<EntityType<ProductType>>;
 }
 
 export function ProductVerticalList({ title, data }: Props) {
