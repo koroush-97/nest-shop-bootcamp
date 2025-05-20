@@ -1,5 +1,6 @@
 // react elements
 
+import RegisterModal from "@/components/common/auth/RegisterModal";
 import Link from "next/link";
 
 // components
@@ -9,6 +10,8 @@ import { SearchForm } from "@/components";
 import { IconBox } from "@/components";
 import { useEffect, useState } from "react";
 import { useOverlay } from "@/hooks/use-overlay";
+
+import LoginModal from "@/components/common/auth/LoginModal";
 
 export function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
@@ -29,8 +32,19 @@ export function Header() {
     e.stopPropagation();
   };
 
+  const [showModal, setShowModal] = useState<"login" | "register" | null>(null);
+
+  const onCloseHandler = () => {
+    setShowModal(null);
+    console.log("clicked close");
+  };
+
   return (
     <header className="mb-[33px]">
+      {showModal === "login" && (
+        <LoginModal onClose={onCloseHandler} setShowModal={setShowModal} />
+      )}
+      {showModal === "register" && <RegisterModal onClose={onCloseHandler} />}
       <div>
         <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
           <Logo />
@@ -38,7 +52,10 @@ export function Header() {
             <SearchForm inputClassName={"py-[15px]"} />
           </div>
           <ul className="hidden lg:flex gap-5">
-            <li className="flex gap-2 cursor-pointer">
+            <li
+              onClick={() => setShowModal("login")}
+              className="flex gap-2 cursor-pointer"
+            >
               <IconBox
                 linkClassName={"flex item-center"}
                 icon={"icon-user"}
