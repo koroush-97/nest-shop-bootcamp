@@ -12,6 +12,7 @@ import type { AppProps } from "next/app";
 import { Lato, Quicksand } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
+import { ModalContextProvider } from "@/store/ModalContext";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -43,17 +44,19 @@ export default function App({ Component, pageProps }: AppProps) {
         }
       `}</style>
       <QueryClientProvider client={queryClient}>
-        <div id={"portal"}></div>
-        <Layout>
-          <Component {...pageProps} />
-          <ToastContainer
-            autoClose={false}
-            hideProgressBar={false}
-            closeOnClick={true}
-            draggable={false}
-            theme={"light"}
-          />
-        </Layout>
+        <ModalContextProvider>
+          <div id={"portal"}></div>
+          <Layout>
+            <Component {...pageProps} />
+            <ToastContainer
+              autoClose={false}
+              hideProgressBar={false}
+              closeOnClick={true}
+              draggable={false}
+              theme={"light"}
+            />
+          </Layout>
+        </ModalContextProvider>
       </QueryClientProvider>
     </>
   );

@@ -1,20 +1,17 @@
 import React, { Dispatch, SetStateAction } from "react";
 import Modal from "../ui/modal/Modal";
-import Portal from "../ui/portal/Portal";
+import { useModal } from "@/store/ModalContext";
 
 interface Props {
   onClose: () => void;
-  setShowModal: Dispatch<SetStateAction<"login" | "register" | null>>;
 }
 
-export default function LoginModal({ onClose, setShowModal }: Props) {
+export default function LoginModal({ onClose }: Props) {
+  const { openModal, closeModal } = useModal();
   return (
-    <Modal title={"login"} closeModal={onClose}>
+    <Modal title={"login"} closeModal={closeModal}>
       <form></form>
-      <span onClick={() => setShowModal("register")}>
-        {" "}
-        go to register modal{" "}
-      </span>
+      <span onClick={() => openModal("register")}> go to register modal </span>
     </Modal>
   );
 }

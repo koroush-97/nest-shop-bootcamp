@@ -8,13 +8,16 @@ import Link from "next/link";
 import { Logo, Menu } from "@/components";
 import { SearchForm } from "@/components";
 import { IconBox } from "@/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useOverlay } from "@/hooks/use-overlay";
 
 import LoginModal from "@/components/common/auth/LoginModal";
+import { useModal } from "@/store/ModalContext";
 
 export function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
+
+  const { currentModal, openModal, closeModal } = useModal();
 
   useOverlay({
     onclick() {
@@ -32,19 +35,10 @@ export function Header() {
     e.stopPropagation();
   };
 
-  const [showModal, setShowModal] = useState<"login" | "register" | null>(null);
-
-  const onCloseHandler = () => {
-    setShowModal(null);
-    console.log("clicked close");
-  };
-
   return (
     <header className="mb-[33px]">
-      {showModal === "login" && (
-        <LoginModal onClose={onCloseHandler} setShowModal={setShowModal} />
-      )}
-      {showModal === "register" && <RegisterModal onClose={onCloseHandler} />}
+      {currentModal === "login" && <LoginModal onClose={closeModal} />}
+      {currentModal === "register" && <RegisterModal onClose={closeModal} />}
       <div>
         <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
           <Logo />
@@ -53,7 +47,7 @@ export function Header() {
           </div>
           <ul className="hidden lg:flex gap-5">
             <li
-              onClick={() => setShowModal("login")}
+              onClick={() => openModal("login")}
               className="flex gap-2 cursor-pointer"
             >
               <IconBox
