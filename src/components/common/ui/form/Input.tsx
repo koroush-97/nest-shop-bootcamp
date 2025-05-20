@@ -1,11 +1,11 @@
-import { useId } from "react";
+import React, { useId } from "react";
 import { UseFormRegisterReturn, FieldErrors } from "react-hook-form";
 import ErrorMessage from "./ErrorMessage";
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLInputElement> {
   type?: "text" | "password" | "email" | "tel" | "number";
   label?: string;
-  placeholder?: string;
+
   register: UseFormRegisterReturn<any>;
   errors: FieldErrors<any>;
 }
@@ -13,9 +13,9 @@ interface Props {
 export function Input({
   type = "text",
   label,
-  placeholder = "",
   register,
   errors,
+  ...rest
 }: Props) {
   const id = useId();
   const name = register.name;
@@ -35,9 +35,9 @@ export function Input({
         )}
         <input
           id={id}
+          {...rest}
           type={type}
           {...register}
-          placeholder={placeholder}
           className={` border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
             haserror && "border-red "
           } `}

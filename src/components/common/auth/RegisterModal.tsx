@@ -2,6 +2,8 @@ import React from "react";
 import Modal from "../ui/modal/Modal";
 import { useForm } from "react-hook-form";
 import { Input } from "../ui/form/Input";
+import { useMutation } from "@tanstack/react-query";
+import { registerApiCall } from "@/api/Auth";
 interface Props {
   onClose: () => void;
 }
@@ -19,8 +21,14 @@ export default function RegisterModal({ onClose }: Props) {
     formState: { errors },
   } = useForm<FormData>();
 
+  const mutate = useMutation({ mutationFn: registerApiCall });
+
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    mutate.mutate(data, {
+      onSuccess: (response) => {
+        console.log("response : =====>", response);
+      },
+    });
   };
 
   return (
@@ -33,7 +41,7 @@ export default function RegisterModal({ onClose }: Props) {
               required: "enter your username please",
             })}
             label={"Username"}
-            placeholder={"enter your user name..."}
+            {...{ placeholder: "enter your user name..." }}
             errors={errors}
           />
         </div>
@@ -43,7 +51,7 @@ export default function RegisterModal({ onClose }: Props) {
             type="email"
             register={register("email", { required: "Enter your email" })}
             label={"email"}
-            placeholder={"enter your user name..."}
+            {...{ placeholder: "enter your email name..." }}
             errors={errors}
           />
         </div>
@@ -56,7 +64,7 @@ export default function RegisterModal({ onClose }: Props) {
               minLength: { value: 3, message: "min 3 character" },
             })}
             label={"password"}
-            placeholder={"****"}
+            {...{ placeholder: "enter your passwoed name..." }}
             errors={errors}
           />
         </div>
