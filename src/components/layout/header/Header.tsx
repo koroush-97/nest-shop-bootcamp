@@ -10,11 +10,14 @@ import { SearchForm } from "@/components";
 import { IconBox } from "@/components";
 import { useState } from "react";
 import { useOverlay } from "@/hooks/use-overlay";
-
 import LoginModal from "@/components/common/auth/LoginModal";
 import { useModal } from "@/store/ModalContext";
+import { useUser } from "@/store/AuthContext";
+import { toast } from "react-toastify";
 
 export function Header() {
+  const { isLogin, logout } = useUser();
+
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 
   const { currentModal, openModal, closeModal } = useModal();
@@ -35,6 +38,15 @@ export function Header() {
     e.stopPropagation();
   };
 
+  const accountHandler = () => {
+    if (isLogin) {
+      logout();
+      toast.success("شما با موفقیت از اکانت خود خارج شدید");
+    } else {
+      openModal("login");
+    }
+  };
+
   return (
     <header className="mb-[33px]">
       {currentModal === "login" && <LoginModal onClose={closeModal} />}
@@ -46,15 +58,12 @@ export function Header() {
             <SearchForm inputClassName={"py-[15px]"} />
           </div>
           <ul className="hidden lg:flex gap-5">
-            <li
-              onClick={() => openModal("login")}
-              className="flex gap-2 cursor-pointer"
-            >
+            <li onClick={accountHandler} className="flex gap-2 cursor-pointer">
               <IconBox
                 linkClassName={"flex item-center"}
                 icon={"icon-user"}
                 size={24}
-                title={"Account"}
+                title={`${isLogin ? "logout" : "login/register"}`}
                 link={"#"}
                 hideTitleOnMobile={true}
                 titleClassName={"text-medium text-gray-500 font-lato  ml-2"}
