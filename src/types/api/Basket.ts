@@ -1,3 +1,4 @@
+import apiClient from "@/api/config/ApiClient";
 import { ProductType } from "./Product";
 import { EntityType } from "./Response";
 

@@ -1,5 +1,5 @@
 // react elements
-
+import { useQueryClient } from "@tanstack/react-query";
 import RegisterModal from "@/components/common/auth/RegisterModal";
 import Link from "next/link";
 
@@ -28,6 +28,8 @@ export function Header() {
 
   const { currentModal, openModal, closeModal } = useModal();
 
+  const queryClient = useQueryClient();
+
   // const basket = useContext(BasketContext);
 
   useOverlay({
@@ -49,6 +51,7 @@ export function Header() {
   const accountHandler = () => {
     if (isLogin) {
       logout();
+      queryClient.invalidateQueries({ queryKey: ["get-basket"] });
       toast.success("شما با موفقیت از اکانت خود خارج شدید");
     } else {
       openModal("login");
