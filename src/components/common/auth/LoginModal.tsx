@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Modal from "../ui/modal/Modal";
 import { useModal } from "@/store/ModalContext";
 import { useForm } from "react-hook-form";

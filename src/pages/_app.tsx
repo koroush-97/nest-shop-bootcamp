@@ -14,6 +14,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import { ModalContextProvider } from "@/store/ModalContext";
 import { AuthContextProvider } from "@/store/AuthContext";
+import { BasketContextProvider } from "@/store/BasketContext";
 const quicksand = Quicksand({
   subsets: ["latin"],
 });
@@ -44,21 +45,23 @@ export default function App({ Component, pageProps }: AppProps) {
         }
       `}</style>
       <QueryClientProvider client={queryClient}>
-        <AuthContextProvider>
-          <ModalContextProvider>
-            <div id={"portal"}></div>
-            <Layout>
-              <Component {...pageProps} />
-              <ToastContainer
-                autoClose={false}
-                hideProgressBar={false}
-                closeOnClick={true}
-                draggable={false}
-                theme={"light"}
-              />
-            </Layout>
-          </ModalContextProvider>
-        </AuthContextProvider>
+        <BasketContextProvider>
+          <AuthContextProvider>
+            <ModalContextProvider>
+              <div id={"portal"}></div>
+              <Layout>
+                <Component {...pageProps} />
+                <ToastContainer
+                  autoClose={false}
+                  hideProgressBar={false}
+                  closeOnClick={true}
+                  draggable={false}
+                  theme={"light"}
+                />
+              </Layout>
+            </ModalContextProvider>
+          </AuthContextProvider>
+        </BasketContextProvider>
       </QueryClientProvider>
     </>
   );
