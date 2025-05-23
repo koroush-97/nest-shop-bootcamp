@@ -24,6 +24,12 @@ apiClient.interceptors.response.use(
     if (error.response) {
       if (error.response.status === 404) {
         toast.error("منابع درخواستی وجو ندارد");
+        console.warn("🔍 خطای 404:", {
+          url: error.config?.url,
+          method: error.config?.method,
+          data: error.config?.data,
+          response: error.response?.data,
+        });
       } else if (error.response.status === 400) {
         console.log("SERVER RESPONSE:", error.response.data);
         toast.error(" پارامتر های ارسالی صحیح نمی باشند ");
