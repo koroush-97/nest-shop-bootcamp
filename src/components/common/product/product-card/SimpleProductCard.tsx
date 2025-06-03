@@ -13,7 +13,7 @@ interface Props {
 
 export function SimpleProductCard({ data }: Props) {
   return (
-    <div className="group border-[1px] border-gray-200 hover:border-green-150 rounded-[10px] hover:shadow-[20px_20px_40px_0_rgba(24,24,24,0.07)] relative p-3 md:p-4 xl:px-5 xl:pb-5 lg:pt-[65px] h-full">
+    <div className="group border-[1px] border-gray-200 hover:border-green-150 rounded-[10px] hover:shadow-[20px_20px_40px_0_rgba(24,24,24,0.07)] relative p-3 md:p-4 xl:px-5 xl:pb-5 lg:pt-[65px] min-h-[500px] max-h-[500px] flex flex-col justify-between">
       {data?.attributes?.label && (
         <Badge
           badge={data.attributes.label}
@@ -41,9 +41,9 @@ export function SimpleProductCard({ data }: Props) {
         height={168}
         width={210}
       />
-      <div className="flex flex-col gap-2 ">
+      <div className="flex flex-col justify-between max-h-[90px] min-h-[90px] ">
         {data?.attributes?.categories?.data[0] && (
-          <div className="text-gray-500 text-xsmall">
+          <div className="text-gray-500 text-xsmall flex-1">
             {data.attributes.categories?.data[0].attributes.title}
           </div>
         )}
@@ -52,10 +52,10 @@ export function SimpleProductCard({ data }: Props) {
             {data.attributes?.title}
           </h3>
         </Link>
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-1 items-center">
           <Rating rate={data.attributes?.rate} />
         </div>
-        <div className="font-lato text-xsmall text-gray-500">
+        <div className="font-lato text-xsmall text-gray-500 flex flex-1 justify-between">
           {data.attributes?.weight} {data.attributes?.unit}
         </div>
       </div>
@@ -108,7 +108,7 @@ export function SimpleProductCard({ data }: Props) {
           </div>
         </>
       ) : (
-        <div className="flex items-center justify-between mt-3">
+        <div className="flex  items-center justify-between mt-3">
           <div>
             {data.attributes?.sell_price ? (
               <div>

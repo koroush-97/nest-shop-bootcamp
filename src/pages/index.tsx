@@ -10,12 +10,9 @@ import {
 import { FeaturedCategories } from "@/components";
 import { MiniProductSlider } from "@/components";
 import { SimpleProductSlider } from "@/components/common/product";
-import { BestSellers } from "@/mock/BestSellers";
 // mock
-import { popularProducts } from "@/mock/PopularProducts";
-import { PopularFruit } from "@/mock/PopularFruit";
+
 import Link from "next/link";
-import { DealsOfTheDaysMock } from "@/mock/DealsOfTheDayMock";
 import { getAllProductsApiCall } from "@/api/Product";
 import { useQuery } from "@tanstack/react-query";
 import { ApiResponseType } from "@/types";
