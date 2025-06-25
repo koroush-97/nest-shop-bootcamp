@@ -6,3 +6,4 @@ export * from "./modal";
 export * from "./portal";
 export * from "./form";
 export * from "./title-card";
+export * from "./services-card";
