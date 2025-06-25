@@ -5,3 +5,4 @@ export * from "./badge";
 export * from "./modal";
 export * from "./portal";
 export * from "./form";
+export * from "./title-card";

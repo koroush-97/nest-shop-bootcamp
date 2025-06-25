@@ -81,7 +81,7 @@ export function Footer() {
               <Link href="#">Terms &amp; Conditions</Link>
             </li>
             <li className="font-lato text-medium text-blue-300">
-              <Link href="#">Contact Us</Link>
+              <Link href="/ContactUs">Contact Us</Link>
             </li>
             <li className="font-lato text-medium text-blue-300">
               <Link href="#">Support Center</Link>
