@@ -32,7 +32,6 @@ export default function MapClient() {
       <Marker
         position={position}
         icon={customIcon}
-        draggable
         eventHandlers={{
           dragend(e) {
             const marker = e.target;
