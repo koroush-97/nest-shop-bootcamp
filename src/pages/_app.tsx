@@ -1,6 +1,8 @@
 import Layout from "@/components/layout/Layout";
 import "@/styles/globals.css";
 import "@/styles/icons.css";
+import "leaflet/dist/leaflet.css";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/autoplay";

@@ -8,10 +8,16 @@ import {
   Input,
   TextArea,
 } from "@/components";
+import dynamic from "next/dynamic";
+
 import { ServiceCardMock, compareShopMock } from "../../mock/ServiceCard";
 import { useForm } from "react-hook-form";
 
 export default function ContactUS() {
+  const MapClient = dynamic(() => import("@/components/common/map/MapClient"), {
+    ssr: false,
+  });
+
   const {
     register,
     handleSubmit,
@@ -24,7 +30,7 @@ export default function ContactUS() {
 
   return (
     <>
-      <Section classname="min-h-[356px] p-2  flex flex-col md:justify-center md:items-center md:flex-row gap-0 md:gap-10">
+      <Section classname="min-h-[356px] lg:p-20  flex flex-col md:justify-center md:items-center md:flex-row gap-0 md:gap-10">
         <TitleCard
           data={MainTitlesType1}
           className="w-full md:w-[33.33%]  flex flex-col"
@@ -39,9 +45,11 @@ export default function ContactUS() {
         </Section>
       </Section>
 
-      <Section classname="h-[483px] border-2">test</Section>
+      <Section classname="h-[483px] border-2 mb-0  p-0">
+        <MapClient />
+      </Section>
 
-      <Section classname="min-h-[213px]   flex flex-col md:flex-row gap-10">
+      <Section classname="min-h-[213px] lg:p-20  flex flex-col md:flex-row gap-10">
         <ServicesCard
           data={compareShopMock[0]}
           className="md:w-[33.33%]  flex flex-col h-auto p-2"
@@ -59,7 +67,7 @@ export default function ContactUS() {
         />
       </Section>
 
-      <Section classname="min-h-[697px]  p-2 flex flex-col md:flex-row">
+      <Section classname="min-h-[697px]  lg:p-20 flex flex-col md:flex-row">
         <div className="w-full md:w-[66.33%] flex flex-col ">
           <div className="h-1/3">
             <TitleCard
