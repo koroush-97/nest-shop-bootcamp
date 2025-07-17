@@ -4,21 +4,7 @@ import { Rating } from "../../rating";
 import { timerHelper } from "@/utils/Timer";
 import { EntityType } from "@/types";
 import { ProductType } from "@/types/api/Product";
-
-// interface Props {
-//   data: {
-//     title: string;
-//     image: string;
-//     category: string;
-//     rate: number;
-//     weight: number;
-//     unit: string;
-//     sale_price: number;
-//     price: number;
-//     label: string;
-//     dead_line: string;
-//   };
-// }
+import { ProductCardBottom } from "./ProductCardBottom";
 
 interface Props {
   data: EntityType<ProductType>;
@@ -31,16 +17,6 @@ export function ProductDealsCard({ data }: Props) {
     minutes: 0,
     seconds: 0,
   });
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     const timeObj = timerHelper(data.attributes.discount_expire_date ?? "");
-  //     setRemainTime(timeObj);
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
 
   // TODO تاریخ رو از استاد برای ایده کمک بگیر
 
@@ -130,22 +106,7 @@ export function ProductDealsCard({ data }: Props) {
                   ${data.attributes.price}
                 </span>
               )}
-              <div className="add-product">
-                <button className="flex items-center justify-center text-heading-sm text-green-200 border-[1px] rounded-[4px] bg-green-150 px-[10px] py-[5px]">
-                  Adds +
-                </button>
-                <div className="input-product__container hidden border-[1px] rounded-[4px] border-green-300 text-green-300 h-[30px] p-[3px]">
-                  <input
-                    type="number"
-                    defaultValue={1}
-                    className="input-product h-[24px] w-[50px] border-0 focus:outline-none text-center"
-                  />
-                  <div className="flex flex-col justify-between">
-                    <i className="up icon-angle-small-up text-[10px]" />
-                    <i className="down icon-angle-small-down text-[10px]" />
-                  </div>
-                </div>
-              </div>
+              <ProductCardBottom productData={data} />
             </div>
           </div>
         </div>

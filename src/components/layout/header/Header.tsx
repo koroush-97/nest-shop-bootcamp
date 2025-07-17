@@ -1,5 +1,5 @@
 // react elements
-
+import { useQueryClient } from "@tanstack/react-query";
 import RegisterModal from "@/components/common/auth/RegisterModal";
 import Link from "next/link";
 
@@ -8,19 +8,29 @@ import Link from "next/link";
 import { Logo, Menu } from "@/components";
 import { SearchForm } from "@/components";
 import { IconBox } from "@/components";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useOverlay } from "@/hooks/use-overlay";
 import LoginModal from "@/components/common/auth/LoginModal";
 import { useModal } from "@/store/ModalContext";
 import { useUser } from "@/store/AuthContext";
 import { toast } from "react-toastify";
 
+import { useBasket } from "@/hooks/use-basket";
+
 export function Header() {
+  const { basketItems } = useBasket();
+
+  console.log("basketItems ", basketItems);
+
   const { isLogin, logout } = useUser();
 
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 
   const { currentModal, openModal, closeModal } = useModal();
+
+  const queryClient = useQueryClient();
+
+  // const basket = useContext(BasketContext);
 
   useOverlay({
     onclick() {
@@ -41,6 +51,7 @@ export function Header() {
   const accountHandler = () => {
     if (isLogin) {
       logout();
+      queryClient.invalidateQueries({ queryKey: ["get-basket"] });
       toast.success("شما با موفقیت از اکانت خود خارج شدید");
     } else {
       openModal("login");
@@ -69,6 +80,7 @@ export function Header() {
                 titleClassName={"text-medium text-gray-500 font-lato  ml-2"}
               />
             </li>
+
             <li className="flex gap-2 cursor-pointer">
               <IconBox
                 linkClassName={"flex item-center"}
@@ -77,7 +89,7 @@ export function Header() {
                 title={"Card"}
                 link={"#"}
                 hideTitleOnMobile={true}
-                badge={2}
+                badge={basketItems.length}
                 titleClassName={"text-medium text-gray-500 font-lato  ml-2"}
               />
             </li>
