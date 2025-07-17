@@ -1,10 +1,14 @@
+import LoginModal from "@/components/common/auth/LoginModal";
 import { IconBox, ImagView, Logo } from "@/components/common";
 import Link from "next/link";
+import { useState } from "react";
+import RegisterModal from "@/components/common/auth/RegisterModal";
 
 export function Footer() {
   // TODO fix mobil menu
+
   return (
-    <footer className="container mb-[68px]">
+    <footer className="container mb-[68px] relative">
       <div className="mb-[68px]">
         <div className="rounded-[6px] md:rounded-[14px] lg:rounded-[30px] bg-hero-pattern bg-[rgba(59,128,126,.2)] bg-opacity-20 bg-cover bg-top bg-no-repeat flex justify-between items-center mt-[38px] relative">
           <div className="min-h-[160px] pl-3 pt-3 sm:pl-4 sm:pt4 md:pl-6 md:pt-6 lg:pl-10 lg:py-10 xl:pl-14 xl:py-14 2xl:py-[72px] 2xl:pl-[72px]">

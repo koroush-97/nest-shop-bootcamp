@@ -1,5 +1,6 @@
 // react elements
 
+import RegisterModal from "@/components/common/auth/RegisterModal";
 import Link from "next/link";
 
 // components
@@ -7,11 +8,19 @@ import Link from "next/link";
 import { Logo, Menu } from "@/components";
 import { SearchForm } from "@/components";
 import { IconBox } from "@/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useOverlay } from "@/hooks/use-overlay";
+import LoginModal from "@/components/common/auth/LoginModal";
+import { useModal } from "@/store/ModalContext";
+import { useUser } from "@/store/AuthContext";
+import { toast } from "react-toastify";
 
 export function Header() {
+  const { isLogin, logout } = useUser();
+
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
+
+  const { currentModal, openModal, closeModal } = useModal();
 
   useOverlay({
     onclick() {
@@ -29,8 +38,19 @@ export function Header() {
     e.stopPropagation();
   };
 
+  const accountHandler = () => {
+    if (isLogin) {
+      logout();
+      toast.success("شما با موفقیت از اکانت خود خارج شدید");
+    } else {
+      openModal("login");
+    }
+  };
+
   return (
     <header className="mb-[33px]">
+      {currentModal === "login" && <LoginModal onClose={closeModal} />}
+      {currentModal === "register" && <RegisterModal onClose={closeModal} />}
       <div>
         <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
           <Logo />
@@ -38,12 +58,12 @@ export function Header() {
             <SearchForm inputClassName={"py-[15px]"} />
           </div>
           <ul className="hidden lg:flex gap-5">
-            <li className="flex gap-2 cursor-pointer">
+            <li onClick={accountHandler} className="flex gap-2 cursor-pointer">
               <IconBox
                 linkClassName={"flex item-center"}
                 icon={"icon-user"}
                 size={24}
-                title={"Account"}
+                title={`${isLogin ? "logout" : "login/register"}`}
                 link={"#"}
                 hideTitleOnMobile={true}
                 titleClassName={"text-medium text-gray-500 font-lato  ml-2"}
